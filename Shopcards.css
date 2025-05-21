@@ -1,0 +1,241 @@
+/* Shopcards.css - Complete Updated Version */
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Playfair+Display:wght@400;700&display=swap');
+
+.shop-cards-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-family: 'Nothing You Could Do', cursive;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  width: 80%; /* Slightly narrower than text */
+  height: 3px;
+  background: linear-gradient(90deg, 
+    rgba(0,0,0,0) 0%, 
+    rgba(0,0,0,0.7) 50%, 
+    rgba(0,0,0,0) 100%);
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%); /* Perfect centering */
+  filter: blur(1.5px);
+  border-radius: 50%; /* Soft edges */
+}
+
+.cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.shop-card {
+  display: flex;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: 0.3s ease;
+  background-color: #fff;
+}
+
+.shop-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Image container styles */
+.image-container {
+  flex: 0 0 30%; /* Takes 30% of card width */
+  min-width: 250px;
+  max-width: 250px;
+  height: 280px;
+  overflow: hidden;
+  margin: 1.5rem;
+  align-self: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+  border-radius: 8px;
+}
+
+.shop-card:hover .image-container img {
+  transform: scale(1.05);
+}
+
+/* Alternating layout */
+.image-left {
+  flex-direction: row;
+}
+
+.image-left .image-container {
+  margin-left: 2.5rem;
+  margin-right: 1rem;
+}
+
+.image-right {
+  flex-direction: row-reverse;
+}
+
+.image-right .image-container {
+  margin-right: 2.5rem;
+  margin-left: 1rem;
+}
+
+/* Info container styles */
+.info-container {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Add this to your existing Shopcards.css */
+.shop-name {
+  position: relative;
+  display: inline-block; /* Required for underline sizing */
+  margin-bottom: 1.5rem; /* Space for underline */
+  text-align: center; /* Center the text and underline */
+  width: 100%; /* Full width for centering */
+}
+
+.shop-name::after {
+  content: '';
+  position: absolute;
+  width: 50%; /* Underline half the text width */
+  height: 2px;
+  background: linear-gradient(90deg, 
+    rgba(118,75,162,0) 0%, 
+    rgba(118,75,162,0.8) 50%, 
+    rgba(118,75,162,0) 100%);
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%); /* Perfect centering */
+  filter: blur(1px); /* Soft edges */
+  border-radius: 50%; /* Rounded ends */
+}
+
+.shop-specialty {
+  font-size: 1.8rem;
+  color: #000000;
+  margin: 0.8rem 0;
+  font-style: italic;
+}
+
+.shop-details {
+  font-size: 1rem;
+  color: #000000;
+  margin-bottom: 0.3rem;
+}
+
+.shop-experience {
+  font-style: italic;
+  margin: 1rem 0;
+  color: #333;
+}
+
+/* Categories section */
+.categories-section {
+  margin-top: 1.5rem;
+}
+
+.categories-section h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.categories-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.categories-section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Button styles */
+.explore-btn {
+   margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.explore-btn:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+.explore-btn::after {
+  content: '→';
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.explore-btn:hover::after {
+  transform: translateX(5px);
+}
+
+/* Loading states */
+.loading, .no-shops {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  color: #666;
+  padding: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shop-card {
+    flex-direction: column;
+  }
+  
+  .image-container {
+    flex: 1;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    height: 200px;
+  }
+  
+  .image-left .image-container,
+  .image-right .image-container {
+    margin: 0;
+  }
+  
+  .info-container {
+    padding: 1.5rem;
+  }
+}
