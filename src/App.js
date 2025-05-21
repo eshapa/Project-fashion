@@ -18,6 +18,7 @@ import FabricCategoryPage from './components/FabricCategoryPage';
 import TailorDetails from './components/Tailordetails';
 import Shopimages from './components/Shopimages';
 import TailorPortfolio from './components/TailorPortfolio';
+import TailorChat from './components/TailorChat';
 
 function App() {
   const location = useLocation();
@@ -47,7 +48,7 @@ function App() {
                     <Route path="/vastrakosh" element={<VastraKosh/>} />
                   <Route path="/shopimages/:shopId" element={<Shopimages />} />
 <Route path="/tailor/:id" element={<TailorPortfolio/>} />
-          
+          {/* <Route path="/tailorchat" element={<TailorChat/>} /> */}
 
              {/* 🔥 Just this added */}
         {/* Add similar routes for tailor and user registration if needed */}
