@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import './Shopimages.css'; // Import the CSS file
+import { useParams, useNavigate } from 'react-router-dom';
+import './Shopimages.css';
 
 const Shopimages = () => {
   const { shopId } = useParams();
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([
     { categoryName: '', subtypes: [{ name: '', price: '', images: [] }] },
   ]);
@@ -68,11 +69,12 @@ const Shopimages = () => {
     });
 
     try {
-      const res = await axios.post(
+      await axios.post(
         'http://localhost:5000/api/fabrics/add-multiple-categories',
         formData
       );
       alert('✅ Categories added successfully!');
+      navigate('/shop-cards');
     } catch (err) {
       console.error('Error:', err.response?.data || err.message);
       alert(`❌ Failed to add categories: ${err.response?.data?.message || err.message}`);

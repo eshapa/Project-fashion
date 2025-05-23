@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './TailorPortfolio.css';
-import im from '../components/assests/img.png'
-
+import im from '../components/assests/img.png';
 
 const TailorProfile = () => {
   const { id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [tailorData, setTailorData] = useState(location.state?.tailor || null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');
-  
+
   const fashionQuotes = [
     "Fashion is the armor to survive everyday life",
     "Clothes mean nothing until someone lives in them",
@@ -72,9 +73,17 @@ const TailorProfile = () => {
   const categories = ['All', ...Object.keys(categorizedImages)];
   const filteredImages = activeCategory === 'All' ? images : categorizedImages[activeCategory] || [];
 
+  const handleStitchClick = () => {
+    navigate(`/orderform/${id}`, { state: { tailor: tailorData } });
+  };
+
+  const handleContactClick = () => {
+    navigate(`/chat/${id}`, { state: { tailor: tailorData } });
+  };
+
   return (
     <div className="portfolio-container">
-      {/* Split Hero Section */}
+      {/* Hero Section */}
       <header className="split-hero">
         <div className="left-panel">
           <h1 className="name-title">{tailorData.name.toUpperCase()}</h1>
@@ -90,7 +99,6 @@ const TailorProfile = () => {
             </div>
           </div>
         </div>
-        
         <div className="right-panel">
           <div className="quote-container">
             <p className="inspirational-quote">"{currentQuote}"</p>
@@ -100,48 +108,40 @@ const TailorProfile = () => {
       </header>
 
       {/* About Section */}
-   {/* About Section */}
-<section className="about-section">
-  <h2 className="section-title">ABOUT THE ARTIST</h2>
-  <div className="about-grid">
-    <div className="about-card glass-card">
-      <h3>SPECIALTY</h3>
-      <p>{tailorData.specialty}</p>
-    </div>
-    <div className="about-card glass-card">
-      <h3>STYLE</h3>
-      <p>{tailorData.tailorType}</p>
-    </div>
-    <div className="about-card glass-card">
-      <h3>LOCATION</h3>
-      <p>{tailorData.city}</p>
-    </div>
-    <div className="about-card glass-card">
-      <h3>PRICING</h3>
-      <p>{tailorData.pricingModel}</p>
-    </div>
-  </div>
-</section>
+      <section className="about-section">
+        <h2 className="section-title">ABOUT THE ARTIST</h2>
+        <div className="about-grid">
+          <div className="about-card glass-card">
+            <h3>SPECIALTY</h3>
+            <p>{tailorData.specialty}</p>
+          </div>
+          <div className="about-card glass-card">
+            <h3>STYLE</h3>
+            <p>{tailorData.tailorType}</p>
+          </div>
+          <div className="about-card glass-card">
+            <h3>LOCATION</h3>
+            <p>{tailorData.city}</p>
+          </div>
+          <div className="about-card glass-card">
+            <h3>PRICING</h3>
+            <p>{tailorData.pricingModel}</p>
+          </div>
+        </div>
+      </section>
 
-         {/* Feature Image Section */}
-<section className="highlight-section">
-  <h2 className="section-title">TAILOR IN ACTION</h2>
-  <div className="highlight-image-container black-card">
-    <img
-      src={im} // Replace with your actual image path
-      alt="Tailor at work"
-      className="highlight-image"
-    />
-    <div className="highlight-overlay">
-      <p className="highlight-caption">Crafting excellence with every stitch.</p>
-    </div>
-  </div>
-</section>
+      {/* Feature Image */}
+      <section className="highlight-section">
+        <h2 className="section-title">TAILOR IN ACTION</h2>
+        <div className="highlight-image-container black-card">
+          <img src={im} alt="Tailor at work" className="highlight-image" />
+          <div className="highlight-overlay">
+            <p className="highlight-caption">Crafting excellence with every stitch.</p>
+          </div>
+        </div>
+      </section>
 
-
-
-
-      {/* Gallery Section */}
+      {/* Gallery */}
       <section className="gallery-section">
         <div className="section-header">
           <h2 className="section-title">MASTERPIECES</h2>
@@ -162,9 +162,9 @@ const TailorProfile = () => {
           <div className="masonry-gallery">
             {filteredImages.map((img) => (
               <div key={img._id} className="gallery-item black-card">
-                <img 
-                  src={`http://localhost:5000${img.imagePath}`} 
-                  alt={img.caption} 
+                <img
+                  src={`http://localhost:5000${img.imagePath}`}
+                  alt={img.caption}
                   className="gallery-image"
                 />
                 <div className="image-overlay">
@@ -178,11 +178,15 @@ const TailorProfile = () => {
         )}
       </section>
 
-      {/* Action Buttons Section */}
-<div className="action-buttons-container">
-  <button className="action-button glass-button">Contact</button>
-  <button className="action-button black-button">Stitch with This Tailor</button>
-</div>
+      {/* Action Buttons */}
+      <div className="action-buttons-container">
+        <button className="action-button glass-button" onClick={handleContactClick}>
+          Contact
+        </button>
+        <button className="action-button black-button" onClick={handleStitchClick}>
+          Stitch with This Tailor
+        </button>
+      </div>
     </div>
   );
 };

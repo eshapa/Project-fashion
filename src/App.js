@@ -18,8 +18,10 @@ import FabricCategoryPage from './components/FabricCategoryPage';
 import TailorDetails from './components/Tailordetails';
 import Shopimages from './components/Shopimages';
 import TailorPortfolio from './components/TailorPortfolio';
+import ShopCards from './components/Shopcards';
+import ShopPortfolio from './components/ShopPortfolio';
+import OrderForm from './components/OrderForm';
 import TailorChat from './components/TailorChat';
-
 function App() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -39,6 +41,8 @@ function App() {
         <Route path="/Alldesigner" element={<AllDesigner />} />
         <Route path="/Roll" element={<Roll />} />
         <Route path="/vastrakosh" element={<VastraKosh />} />
+         {/* <Route path="/" element={<VastraKosh />} />y */}
+    <Route path="/explore-shops" element={<ShopCards />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/shopregistration" element={<ShopRegistration />} />
          <Route path="/tailorregistration" element={<TailorRegistration />} />
@@ -48,7 +52,11 @@ function App() {
                     <Route path="/vastrakosh" element={<VastraKosh/>} />
                   <Route path="/shopimages/:shopId" element={<Shopimages />} />
 <Route path="/tailor/:id" element={<TailorPortfolio/>} />
-          {/* <Route path="/tailorchat" element={<TailorChat/>} /> */}
+ <Route path="/shop-cards" element={<ShopCards />} />
+ <Route path="/shop-images/:shopId" element={<ShopPortfolio />} />
+<Route path="/orderform/:id" element={<OrderForm />} />
+        <Route path="/chat/:id" element={<TailorChat />} />
+
 
              {/* 🔥 Just this added */}
         {/* Add similar routes for tailor and user registration if needed */}

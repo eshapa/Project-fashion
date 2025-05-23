@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './TailorChat.css';
 
+// Same botResponses can be kept or customized
 const botResponses = {
   "hello": "Hello there! How can I help you today?",
   "hi": "Hi! What can I do for you?",
@@ -11,7 +12,7 @@ const botResponses = {
   "default": "I'm not sure how to respond to that. Could you ask me something else?"
 };
 
-const Chatbot = () => {
+const Chatbot = ({ tailorName = "Tailor" }) => {  // <-- Receive tailorName as prop
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -19,7 +20,7 @@ const Chatbot = () => {
 
   useEffect(() => {
     const greeting = {
-      text: "Hello! I'm your chatbot assistant. How can I help you today?",
+      text: `Hello! I'm your Tailor . How can I help you today?`,
       isUser: false
     };
     setTimeout(() => setMessages([greeting]), 500);
@@ -59,7 +60,7 @@ const Chatbot = () => {
 
   return (
     <div className="chat-container">
-      <div className="chat-header">Chatbot Assistant</div>
+      <div className="chat-header">Tailor</div>
       <div className="chat-messages" ref={chatRef}>
         {messages.map((msg, index) => (
           <div
@@ -69,7 +70,9 @@ const Chatbot = () => {
             {msg.text}
           </div>
         ))}
-        {isTyping && <div className="typing-indicator">Bot is typing...</div>}
+        {isTyping && (
+          <div className="typing-indicator">{`${tailorName} is typing...`}</div>
+        )}
       </div>
       <div className="chat-input">
         <input
