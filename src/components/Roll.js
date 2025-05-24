@@ -20,7 +20,6 @@ const Roll = () => {
   const handleConfirm = async () => {
     if (selectedRole) {
       try {
-        // Send the selected role and email to the backend for registration
         const response = await fetch(`http://localhost:5000/api/register/${selectedRole}`, {
           method: "POST",
           headers: {
@@ -33,7 +32,6 @@ const Roll = () => {
         if (response.ok) {
           alert(`Successfully registered as ${selectedRole}`);
 
-          // Redirect based on the selected role
           if (selectedRole === "shopkeeper") {
             navigate("/shopregistration", { state: { email, role: selectedRole } });
           } else if (selectedRole === "tailor") {
@@ -60,12 +58,20 @@ const Roll = () => {
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 text-center"
+          className="relative bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 text-center"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 50, opacity: 0 }}
           transition={{ type: "spring", stiffness: 100 }}
         >
+          {/* Close (Cross) Button */}
+          <button
+            className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl font-bold"
+            onClick={() => navigate(-1)}
+          >
+            &times;
+          </button>
+
           <h2 className="text-3xl font-bold mb-2 text-gray-900">Select Your Role</h2>
           <p className="text-sm text-gray-500 mb-6">Email: {email}</p>
 
@@ -76,11 +82,11 @@ const Roll = () => {
                 onClick={() => setSelectedRole(role.value)}
                 className={`cursor-pointer rounded-xl border-2 flex items-center gap-4 p-4 transition-all duration-200 ${
                   selectedRole === role.value
-                    ? "border-blue-500 bg-blue-50 shadow-md"
-                    : "border-gray-200 hover:border-blue-300 hover:bg-gray-50"
+                    ? "border-gray-500 bg-gray-100 shadow-sm"
+                    : "border-gray-200 hover:border-gray-400 hover:bg-gray-50"
                 }`}
               >
-                <div className="text-blue-500">{role.icon}</div>
+                <div className="text-gray-600">{role.icon}</div>
                 <span className="text-lg font-semibold text-gray-800">{role.name}</span>
               </div>
             ))}
@@ -91,7 +97,7 @@ const Roll = () => {
             disabled={!selectedRole}
             className={`mt-8 w-full py-3 rounded-xl text-white font-semibold text-lg transition-all duration-300 ${
               selectedRole
-                ? "bg-blue-600 hover:bg-blue-700"
+                ? "bg-gray-700 hover:bg-gray-800"
                 : "bg-gray-300 cursor-not-allowed"
             }`}
           >

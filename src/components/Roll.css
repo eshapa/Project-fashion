@@ -286,16 +286,14 @@
     gap: 0.5rem;
 }
   
-/* Dot styles */
 .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: gray;
-    transition: background-color 0.3s ease;
-}
-  
-.dot.active {
-    background-color: blue;
+  width: 10px;
+  height: 10px;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+  transition: background-color 0.3s;
 }
 
+.dot.active {
+  background-color: #f2f3f8;
+}

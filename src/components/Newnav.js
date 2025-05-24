@@ -1,16 +1,12 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import {
-  FaReact,
-  FaWhatsapp,
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-} from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaReact, FaWhatsapp } from "react-icons/fa";
 import $ from "jquery";
 import "./Newnav.css";
 
 const Newnav = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const path = window.location.pathname;
 
@@ -69,6 +65,10 @@ const Newnav = () => {
     target.parent().addClass("active");
   };
 
+  const handleRollClick = () => {
+    navigate("/roll");
+  };
+
   return (
     <div className="full-width-navbar-wrapper">
       <nav className="navbar navbar-expand-lg navbar-mainbg">
@@ -81,13 +81,14 @@ const Newnav = () => {
         <button
           className="navbar-toggler"
           onClick={() => $(".navbar-collapse").slideToggle(300)}
+          aria-label="Toggle navigation"
         >
           <i className="fas fa-bars"></i>
         </button>
 
         {/* Main nav content */}
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mx-auto"> {/* mx-auto centers the nav items */}
+          <ul className="navbar-nav mx-auto">
             <div className="hori-selector"></div>
 
             <li className="nav-item">
@@ -101,7 +102,6 @@ const Newnav = () => {
                 Shringar Shilpi
               </NavLink>
             </li>
-
 
             <li className="nav-item">
               <NavLink className="nav-link" to="/vastrakosh">
@@ -128,15 +128,26 @@ const Newnav = () => {
               <i className="fas fa-search"></i>
               <input type="text" placeholder="Search" />
             </div>
-            
-            <div className="social-icons">
-            <button className="icon-button" aria-label="React Icon"><FaReact /></button>
-<button className="icon-button" aria-label="WhatsApp"><FaWhatsapp /></button>
-<button className="icon-button" aria-label="Facebook"><FaFacebookF /></button>
-<button className="icon-button" aria-label="Twitter"><FaTwitter /></button>
-<button className="icon-button" aria-label="Instagram"><FaInstagram /></button>
 
+            <div className="social-icons">
+              <button className="icon-button" aria-label="React Icon">
+                <FaReact />
+              </button>
+              <button className="icon-button" aria-label="WhatsApp">
+                <FaWhatsapp />
+              </button>
             </div>
+
+            {/* New Roll navigation hamburger button */}
+            <button
+              onClick={handleRollClick}
+              aria-label="Roll Page"
+              className="roll-hamburger-button"
+            >
+              <div className="bar"></div>
+              <div className="bar"></div>
+              <div className="bar"></div>
+            </button>
           </div>
         </div>
       </nav>
@@ -145,3 +156,4 @@ const Newnav = () => {
 };
 
 export default Newnav;
+

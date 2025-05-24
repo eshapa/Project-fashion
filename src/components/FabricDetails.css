@@ -1,0 +1,221 @@
+.fabric-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.breadcrumb {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.fabric-content {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.fabric-image-container {
+  flex: 1;
+}
+
+.fabric-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border: 1px solid #eee;
+}
+
+.fabric-info {
+  flex: 1;
+}
+
+.fabric-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.quantity-info h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.quantity-info p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.pricing {
+  margin-bottom: 20px;
+}
+
+.current-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #d82e2f;
+  margin-right: 10px;
+}
+
+.original-price {
+  font-size: 16px;
+  text-decoration: line-through;
+  color: #999;
+}
+
+.tax-info {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.features-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.features-list li {
+  padding: 5px 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.features-list li:before {
+  content: "•";
+  color: #d82e2f;
+  position: absolute;
+  left: 0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.add-to-cart, .buy-now {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.add-to-cart {
+  background-color: #fff;
+  color: #d82e2f;
+  border: 1px solid #d82e2f;
+}
+
+.add-to-cart:hover {
+  background-color: #f9f9f9;
+}
+
+.buy-now {
+  background-color: #d82e2f;
+  color: white;
+}
+
+.buy-now:hover {
+  background-color: #c22525;
+}
+
+.discount-table {
+  margin-bottom: 30px;
+}
+
+.discount-table h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.discount-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.discount-table th, .discount-table td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.discount-table th {
+  background-color: #f5f5f5;
+}
+
+.prepaid-offer {
+  font-size: 14px;
+  color: #d82e2f;
+  font-weight: bold;
+}
+
+.brand-values {
+  margin-bottom: 40px;
+}
+
+.brand-values h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  text-align: center;
+}
+
+.value-item {
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+.value-item h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.value-item p {
+  font-size: 14px;
+  color: #666;
+}
+
+.full-description {
+  margin-bottom: 40px;
+}
+
+.full-description h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.full-description p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .fabric-content {
+    flex-direction: column;
+  }
+  
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
