@@ -1,21 +1,34 @@
-import React from 'react';
-import './FabricDetails.css'; // We'll create this CSS file next
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import './FabricDetails.css';
 
 const FabricDetail = () => {
-  const fabric = {
-    name: "Premium Crepe Fabric",
-    price: 249.00,
-    originalPrice: 269.00,
-    quantity: 50.0,
-    description: "Crepe is a silk, wool or synthetic fiber fabric with a distinctively crisp, crimped appearance. It has a flowy and luxurious feel that drapes beautifully. Our premium crepe is soft to the touch while maintaining excellent structure.",
-    features: [
-      "Top choice of designers",
-      "Versatile use, premium look",
-      "Soft to the touch with a luxurious feel",
-      "Expertly crafted yarn brings colors to life"
-    ],
-    imageUrl: "/path-to-your-fabric-image.jpg" // Replace with actual image path
-  };
+  const { categoryName, subtypeId } = useParams();
+  const [fabric, setFabric] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchFabric = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/fabrics/${categoryName}/${subtypeId}`);
+        setFabric(res.data);
+      } catch (err) {
+        setError('Failed to load fabric details');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFabric();
+  }, [categoryName, subtypeId]);
+
+  if (loading) return <div className="fabric-loading">Loading fabric details...</div>;
+  if (error) return <div className="fabric-error">{error}</div>;
+  if (!fabric) return <div className="fabric-not-found">Fabric Not Found</div>;
+
+  const images = fabric.images;
 
   const discounts = [
     { range: "₹2500 - ₹4999", discount: "5% off" },
@@ -26,90 +39,57 @@ const FabricDetail = () => {
 
   return (
     <div className="fabric-detail-container">
-      <div className="breadcrumb">Home / Fabrics / Crepe</div>
-      
+      <div className="breadcrumb">Home / Fabrics / {fabric.name}</div>
+
       <div className="fabric-content">
         <div className="fabric-image-container">
-          <img src={fabric.imageUrl} alt={fabric.name} className="fabric-image" />
+         <img
+  src={`http://localhost:5000/uploads/portfolio/${images && images.length > 0 ? images[0] : 'default-image.jpg'}`}
+  alt={fabric.name}
+  className="fabric-image"
+/>
+
         </div>
-        
+
         <div className="fabric-info">
           <h1 className="fabric-title">{fabric.name}</h1>
-          
+
           <div className="quantity-info">
             <h3>Quantity in meters</h3>
             <p>{fabric.quantity} meters in stock</p>
           </div>
-          
+
           <div className="pricing">
             <span className="current-price">₹{fabric.price.toFixed(2)}</span>
-            <span className="original-price">₹{fabric.originalPrice.toFixed(2)} /meter</span>
+            {fabric.originalPrice && (
+              <span className="original-price">
+                ₹{fabric.originalPrice.toFixed(2)} /meter
+              </span>
+            )}
             <span className="tax-info">Inclusive of all taxes</span>
           </div>
-          
-          <ul className="features-list">
-            {fabric.features.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
-          
-          <div className="action-buttons">
-            <button className="add-to-cart">ADD TO CART</button>
-            <button className="buy-now">BUY NOW</button>
+
+          {fabric.features && fabric.features.length > 0 && (
+            <ul className="features-list">
+              {fabric.features.map((feature, index) => (
+                <li key={index} className="feature-item">✓ {feature}</li>
+              ))}
+            </ul>
+          )}
+
+          <div className="discount-section">
+            <h4>BUY MORE, SAVE MORE!</h4>
+            <ul>
+              {discounts.map((d, idx) => (
+                <li key={idx}>
+                  {d.range}: <strong>{d.discount}</strong>
+                </li>
+              ))}
+            </ul>
           </div>
-          
-          <div className="discount-table">
-            <h3>Discount Table</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Order Value Range (₹)</th>
-                  <th>Discount (%)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {discounts.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.range}</td>
-                    <td>{item.discount}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p className="prepaid-offer">Additional 10% off on prepaid orders, no minimum order value</p>
-          </div>
+
+          <button className="add-to-cart-btn">ADD TO CART</button>
         </div>
-      </div>
-      
-      <div className="brand-values">
-        <h2>When you choose Fabcurate you choose</h2>
-        <div className="values-grid">
-          <div className="value-item">
-            <h3>Exceptional</h3>
-            <p>Quality</p>
-          </div>
-          <div className="value-item">
-            <h3>Value For</h3>
-            <p>Money</p>
-          </div>
-          <div className="value-item">
-            <h3>Trust Of</h3>
-            <p>Brand</p>
-          </div>
-          <div className="value-item">
-            <h3>DESCRIPTION</h3>
-            <p>FABRIC ESTIMATOR</p>
-          </div>
-          <div className="value-item">
-            <h3>SHIPPING</h3>
-            <p>WASHCARE</p>
-          </div>
-        </div>
-      </div>
-      
-      <div className="full-description">
-        <h3>Description</h3>
-        <p>{fabric.description}</p>
       </div>
     </div>
   );

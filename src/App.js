@@ -22,7 +22,7 @@ import ShopCards from './components/Shopcards';
 import ShopPortfolio from './components/ShopPortfolio';
 import OrderForm from './components/OrderForm';
 import TailorChat from './components/TailorChat';
-import FabricDetail from './components/FabricDetails';
+import FabricDetails from './components/FabricDetails';
 function App() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -57,7 +57,7 @@ function App() {
  <Route path="/shop-images/:shopId" element={<ShopPortfolio />} />
 <Route path="/orderform/:id" element={<OrderForm />} />
         <Route path="/chat/:id" element={<TailorChat />} />
-    <Route path="/fabricdetails" element={<FabricDetail />} />
+   <Route path="/fabricdetails/:categoryName/:subtypeId" element={<FabricDetails />} />
 
              {/* 🔥 Just this added */}
         {/* Add similar routes for tailor and user registration if needed */}
