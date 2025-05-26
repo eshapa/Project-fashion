@@ -184,7 +184,7 @@ const FabricDetail = () => {
         </div>
 
         <div className="product-info">
-          <h2 className="product-title">Glow Getter Neon Shrug - Fun, Flowy And Perfect For Night Outs</h2>
+          <h2 className="product-title">DivyLuck Has More To Try, More To Show More To Buy</h2>
           <h1 className="fabric-title">{fabric.name}</h1>
           <p className="fabric-subtitle">{fabric.description}</p>
           <div className="rating">
