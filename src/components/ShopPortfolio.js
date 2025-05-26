@@ -1,7 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react'; // NEW: Added useRef
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ShopPortfolio.css';
+
+const FabricCard = ({ fabric }) => (
+  <div className="fabric-card">
+    <div className="card-image-container">
+      <img src={fabric.image} alt={fabric.name} />
+      <div className="image-overlay">
+        <h4>{fabric.name}</h4>
+        <p>{fabric.region}</p>
+      </div>
+    </div>
+  </div>
+);
 
 const ShopPortfolio = () => {
   const { shopId } = useParams();
@@ -12,20 +24,20 @@ const ShopPortfolio = () => {
   const [error, setError] = useState(null);
   const [showContent, setShowContent] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // NEW: Create a ref for scrolling
   const collectionsRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch all shops and find current shop info
         const shopRes = await axios.get('http://localhost:5000/api/shops/all');
         const currentShop = shopRes.data.find(shop => shop._id === shopId);
         setShopInfo(currentShop);
 
-        // Fetch categories and subtypes (fabrics) by shopId
         const fabricRes = await axios.get(`http://localhost:5000/api/fabrics/shop/${shopId}`);
         setCategories(fabricRes.data);
-
+        
         setTimeout(() => {
           setShowContent(true);
         }, 1000);
@@ -39,9 +51,9 @@ const ShopPortfolio = () => {
     fetchData();
   }, [shopId]);
 
-  const filteredCategories = categories.filter(cat =>
+  const filteredCategories = categories.filter(cat => 
     cat.categoryName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    cat.subtypes.some(sub =>
+    cat.subtypes.some(sub => 
       sub.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
@@ -51,7 +63,7 @@ const ShopPortfolio = () => {
       <div className="bossy-spinner"></div>
     </div>
   );
-
+  
   if (error) return <div className="bossy-error">{error}</div>;
   if (!shopInfo) return <div className="bossy-not-found">SHOP NOT FOUND</div>;
 
@@ -65,8 +77,89 @@ const ShopPortfolio = () => {
 
       {showContent && (
         <>
-          {/* Hero/Intro can go here */}
+          {/* Hero Banner */}
+          <div className="bossy-hero">
+            <div className="bossy-hero-content">
+              <h1 className="bossy-hero-title">PORTFOLIO</h1>
+              <div className="bossy-hero-subtitle">
+                <span>WELCOME TO THE LABEL OF </span>
+                <span className="bossy-shop-name">{shopInfo.shopName.toUpperCase()}</span>
+              </div>
+            </div>
+          </div>
 
+          {/* Shop Introduction */}
+          <div className="bossy-intro">
+            <div className="bossy-intro-left">
+              <h2>OUR STORY</h2>
+              <p>
+                {shopInfo.description || 
+                `Established in ${new Date().getFullYear() - (shopInfo.experience || 20)}, 
+                ${shopInfo.shopName} has been crafting exquisite textiles that embody 
+                India's rich heritage. Our fabrics are woven with stories — each thread 
+                carries the legacy of Varanasi’s Banarasi silk weavers, perfected over 
+                8 generations.`}
+              </p>
+              {/* NEW: Updated button with ref-based scrolling */}
+              <button 
+                className="bossy-explore-btn"
+                onClick={() => {
+                  if (collectionsRef.current) {
+                    collectionsRef.current.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+              >
+                EXPLORE OUR COLLECTION ↓
+              </button>
+            </div>
+            <div className="bossy-intro-right">
+              <div className="bossy-owner">
+                <img 
+                  src={shopInfo.ownerImage || "/default-owner.jpg"} 
+                  alt={`${shopInfo.owner}, Owner`}
+                />
+                <div className="bossy-owner-info">
+                  <h3>{shopInfo.owner}</h3>
+                  <p>MASTER ARTISAN & FOUNDER</p>
+                  <div className="bossy-contact">
+                    <span>{shopInfo.contact}</span>
+                    <span>{shopInfo.email}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Fabric Showcase */}
+          <div className="bossy-showcase">
+            <div className="bossy-section-header">
+              <h2>OUR TEXTILE COLLECTION</h2>
+              <p>HANDCRAFTED FABRICS REPRESENTING INDIA'S DIVERSE WEAVING TRADITIONS</p>
+            </div>
+
+            <div className="bossy-group-image">
+              <img 
+                src="https://cdn.shopify.com/s/files/1/0719/1167/0047/files/Add_a_heading_9_2048x2048.png?v=1720885228" 
+                alt="Traditional textile artisans"
+              />
+            </div>
+
+            <div className="bossy-group-image2">
+              <img 
+                src="https://www.culturalcloth.com/cdn/shop/files/7949975E-2AD2-4EBE-ABB1-CF18C18D0080.jpg?v=1737421062&width=3372" 
+                alt="Traditional textile 1"
+              />
+              <img 
+                src="https://static.toiimg.com/thumb/imgsize-23456,msid-109616656,width-600,resizemode-4/109616656.jpg" 
+                alt="Traditional textile 2"
+              />
+            </div>
+          </div>
+
+          {/* NEW: Added ref to categories section */}
           <div className="bossy-categories" ref={collectionsRef}>
             <div className="bossy-section-header">
               <h2>SHOP COLLECTIONS</h2>
@@ -74,9 +167,9 @@ const ShopPortfolio = () => {
             </div>
 
             <div className="bossy-search-container">
-              <input
-                type="text"
-                placeholder="Search categories or fabrics..."
+              <input 
+                type="text" 
+                placeholder="Search categories..." 
                 className="bossy-search-bar"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -88,25 +181,25 @@ const ShopPortfolio = () => {
                 {filteredCategories.map((cat, idx) => (
                   <div key={idx} className="bossy-category-section">
                     <h3 className="bossy-category-title">{cat.categoryName.toUpperCase()}</h3>
-
+                    
                     <div className="bossy-subcategories-grid">
                       {cat.subtypes.map((sub, subIdx) => (
                         <div key={subIdx} className="bossy-subcategory-card">
                           <h4>{sub.name.toUpperCase()}</h4>
                           <p className="bossy-price">₹{sub.price}</p>
-
+                          
                           <div className="bossy-images-grid">
-                            {sub.images && sub.images.map((img, i) => (
-                              <img
-                                key={i}
-                                src={`http://localhost:5000/uploads/portfolio/${img}`}
-                                alt={`${sub.name}-${i}`}
-                                className="bossy-grid-image"
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => navigate(`/fabricdetails/${cat.categoryName}/${sub._id}`)}
-                              />
-                            ))}
-                          </div>
+        {sub.images && sub.images.map((img, i) => (
+          <img
+            key={i}
+            src={`http://localhost:5000/uploads/portfolio/${img}`}
+            alt={`${sub.name}-${i}`}
+            className="bossy-grid-image"
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate(`/fabricdetails/${cat.categoryName}/${sub._id}`)} // Added this line
+          />
+        ))}
+      </div>
                         </div>
                       ))}
                     </div>
@@ -119,7 +212,10 @@ const ShopPortfolio = () => {
           </div>
         </>
       )}
+    
   
+
+
 
      
       {/* Scoped Internal CSS */}

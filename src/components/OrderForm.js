@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./OrderForm.css";
 
 const MultiStepOrderForm = () => {
   const [step, setStep] = useState(0);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     gender: "",
@@ -27,15 +30,41 @@ const MultiStepOrderForm = () => {
     neck: ""
   });
 
+  const [selectedFabrics, setSelectedFabrics] = useState([]);
+  const [fabricQuantities, setFabricQuantities] = useState({});
+
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("fabricCart")) || [];
+    setSelectedFabrics(cart);
+
+    const initialQuantities = {};
+    cart.forEach((item, idx) => {
+      initialQuantities[idx] = item.quantityInMeters || 1;
+    });
+    setFabricQuantities(initialQuantities);
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async () => {
+    const fabricsWithQuantities = selectedFabrics.map((fab, index) => ({
+      ...fab,
+      quantityInMeters: fabricQuantities[index] || 1
+    }));
+
     try {
-      await axios.post("http://localhost:5000/orders", formData);
+      await axios.post("http://localhost:5000/orders", {
+        ...formData,
+        selectedFabrics: fabricsWithQuantities
+      });
+
       alert("Order placed successfully!");
+      localStorage.removeItem("fabricCart");
+      setSelectedFabrics([]);
+      setFabricQuantities({});
       setFormData({});
       setStep(0);
     } catch (error) {
@@ -56,8 +85,12 @@ const MultiStepOrderForm = () => {
             <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
             <input name="city" placeholder="City" value={formData.city} onChange={handleChange} />
             <input name="address" placeholder="Address" value={formData.address} onChange={handleChange} />
+
+            <br /><br />
+            <button onClick={() => navigate("/explore-shops")}>+ Select Fabric</button>
           </div>
         );
+
       case 1:
         return (
           <div>
@@ -69,76 +102,22 @@ const MultiStepOrderForm = () => {
             <input name="instructions" placeholder="Instructions" value={formData.instructions} onChange={handleChange} />
           </div>
         );
+
       case 2:
         return (
           <div className="measurements-container">
-            <h2>Body Measurements (in inches)</h2>
-            <p>Please provide your exact measurements for perfect fitting</p>
-
-            <div className="measurements-grid">
-              <div className="measurement-group">
-                <h3>Upper Body</h3>
-                <div className="measurement-item">
-                  <label>Chest</label>
-                  <input type="number" name="chest" value={formData.chest} onChange={handleChange} placeholder="Around fullest part" />
-                </div>
-                <div className="measurement-item">
-                  <label>Shoulder</label>
-                  <input type="number" name="shoulder" value={formData.shoulder} onChange={handleChange} placeholder="Shoulder to shoulder" />
-                </div>
-                <div className="measurement-item">
-                  <label>Sleeve Length</label>
-                  <input type="number" name="sleeveLength" value={formData.sleeveLength} onChange={handleChange} placeholder="Shoulder to wrist" />
-                </div>
-                <div className="measurement-item">
-                  <label>Neck</label>
-                  <input type="number" name="neck" value={formData.neck} onChange={handleChange} placeholder="Around neck base" />
-                </div>
-              </div>
-
-              <div className="measurement-group">
-                <h3>Lower Body</h3>
-                <div className="measurement-item">
-                  <label>Waist</label>
-                  <input type="number" name="waist" value={formData.waist} onChange={handleChange} placeholder="Around natural waist" />
-                </div>
-                <div className="measurement-item">
-                  <label>Hip</label>
-                  <input type="number" name="hip" value={formData.hip} onChange={handleChange} placeholder="Around fullest part" />
-                </div>
-                <div className="measurement-item">
-                  <label>Inseam</label>
-                  <input type="number" name="inseam" value={formData.inseam} onChange={handleChange} placeholder="Crotch to ankle" />
-                </div>
-              </div>
-
-              <div className="measurement-group">
-                <h3>General</h3>
-                <div className="measurement-item">
-                  <label>Height</label>
-                  <input type="number" name="height" value={formData.height} onChange={handleChange} placeholder="In inches" />
-                </div>
-                <div className="measurement-diagram">
-                  <img
-                    src="https://example.com/size-chart-diagram.jpg"
-                    alt="Measurement guide diagram"
-                  />
-                  <p>How to measure guide</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="measurement-notes">
-              <h4>Important Notes:</h4>
-              <ul>
-                <li>Measure over light clothing</li>
-                <li>Keep the measuring tape snug but not tight</li>
-                <li>For best results, have someone else measure you</li>
-                <li>All measurements should be in inches</li>
-              </ul>
-            </div>
+            <h2>Body Measurements</h2>
+            <input type="number" name="chest" value={formData.chest} onChange={handleChange} placeholder="Chest" />
+            <input type="number" name="waist" value={formData.waist} onChange={handleChange} placeholder="Waist" />
+            <input type="number" name="hip" value={formData.hip} onChange={handleChange} placeholder="Hip" />
+            <input type="number" name="height" value={formData.height} onChange={handleChange} placeholder="Height" />
+            <input type="number" name="shoulder" value={formData.shoulder} onChange={handleChange} placeholder="Shoulder" />
+            <input type="number" name="sleeveLength" value={formData.sleeveLength} onChange={handleChange} placeholder="Sleeve Length" />
+            <input type="number" name="neck" value={formData.neck} onChange={handleChange} placeholder="Neck" />
+            <input type="number" name="inseam" value={formData.inseam} onChange={handleChange} placeholder="Inseam" />
           </div>
         );
+
       default:
         return null;
     }
@@ -148,7 +127,6 @@ const MultiStepOrderForm = () => {
     <div className="form-container">
       <h1>Place Your Tailor Order</h1>
       {renderStep()}
-
       <div className="button-group">
         {step > 0 && <button onClick={() => setStep(step - 1)}>Back</button>}
         {step < 2 ? (

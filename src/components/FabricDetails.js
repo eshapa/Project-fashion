@@ -1,10 +1,12 @@
+// FabricDetails.js
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './FabricDetails.css';
 
 const FabricDetail = () => {
   const { categoryName, subtypeId } = useParams();
+  const navigate = useNavigate(); // ✅ added for navigation
   const [fabric, setFabric] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,12 +32,23 @@ const FabricDetail = () => {
 
   const images = fabric.images;
 
-  const discounts = [
-    { range: "₹2500 - ₹4999", discount: "5% off" },
-    { range: "₹5000 - ₹7999", discount: "10% off" },
-    { range: "₹8000 - ₹12000", discount: "15% off" },
-    { range: "Above ₹12000", discount: "20% off" }
-  ];
+  const handleAddToCart = () => {
+    const cart = JSON.parse(localStorage.getItem("fabricCart")) || [];
+    const selectedFabric = {
+      fabricName: fabric.name,
+      price: fabric.price,
+      image: images?.[0] || 'default-image.jpg',
+      shopId: fabric.shopId,
+      categoryName,
+      subtypeId
+    };
+    cart.push(selectedFabric);
+    localStorage.setItem("fabricCart", JSON.stringify(cart));
+    alert("Fabric added to cart!");
+
+    // ✅ Redirect back to order form
+    navigate("/orderform/:id");
+  };
 
   return (
     <div className="fabric-detail-container">
@@ -43,12 +56,11 @@ const FabricDetail = () => {
 
       <div className="fabric-content">
         <div className="fabric-image-container">
-         <img
-  src={`http://localhost:5000/uploads/portfolio/${images && images.length > 0 ? images[0] : 'default-image.jpg'}`}
-  alt={fabric.name}
-  className="fabric-image"
-/>
-
+          <img
+            src={`http://localhost:5000/uploads/portfolio/${images?.[0] || 'default-image.jpg'}`}
+            alt={fabric.name}
+            className="fabric-image"
+          />
         </div>
 
         <div className="fabric-info">
@@ -69,26 +81,9 @@ const FabricDetail = () => {
             <span className="tax-info">Inclusive of all taxes</span>
           </div>
 
-          {fabric.features && fabric.features.length > 0 && (
-            <ul className="features-list">
-              {fabric.features.map((feature, index) => (
-                <li key={index} className="feature-item">✓ {feature}</li>
-              ))}
-            </ul>
-          )}
-
-          <div className="discount-section">
-            <h4>BUY MORE, SAVE MORE!</h4>
-            <ul>
-              {discounts.map((d, idx) => (
-                <li key={idx}>
-                  {d.range}: <strong>{d.discount}</strong>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <button className="add-to-cart-btn">ADD TO CART</button>
+          <button className="add-to-cart-btn" onClick={handleAddToCart}>
+            ADD TO CART
+          </button>
         </div>
       </div>
     </div>
