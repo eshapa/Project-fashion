@@ -120,6 +120,13 @@ const Newnav = () => {
                 Contact
               </NavLink>
             </li>
+
+            {/* 🆕 Admin Portal Link */}
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/dashwelcome">
+                Admin Portal
+              </NavLink>
+            </li>
           </ul>
 
           {/* Search bar and social icons on right */}
@@ -138,7 +145,7 @@ const Newnav = () => {
               </button>
             </div>
 
-            {/* New Roll navigation hamburger button */}
+            {/* Roll Hamburger */}
             <button
               onClick={handleRollClick}
               aria-label="Roll Page"
@@ -156,4 +163,3 @@ const Newnav = () => {
 };
 
 export default Newnav;
-

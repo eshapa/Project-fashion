@@ -1,0 +1,84 @@
+/* Container for the entire page */
+.welcome-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;  /* Plain white background */
+  height: 100vh; /* full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hero section as flex container */
+.welcome-hero {
+  display: flex;
+  width: 100%;
+  gap: 3rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Left side with text and button */
+.left-side {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Login button style */
+.hero-login-btn {
+  background-color: #4a154b;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-login-btn:hover {
+  background-color: #5d1b5e;
+}
+
+/* Right side with the image */
+.right-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 768px) {
+  .welcome-hero {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .left-side,
+  .right-side {
+    max-width: 100%;
+    text-align: center;
+  }
+}

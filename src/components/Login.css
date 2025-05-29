@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #000;
+}
+
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.login-left {
+  flex: 1;
+  background: #000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.login-left h1 {
+  font-size: 2.5rem;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.login-left span {
+  font-weight: 300;
+  color: #ccc;
+}
+
+.login-left strong {
+  font-weight: bold;
+  font-size: 2.8rem;
+  color: #fff;
+}
+
+.login-right {
+  flex: 1;
+  background: #fff;
+  border-radius: 0 10px 10px 0;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-right h2 {
+  margin-bottom: 2rem;
+  color: #1f1f1f;
+  font-weight: 600;
+}
+
+.login-right input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.login-actions {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.login-actions a {
+  color: #333;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.login-right button {
+  background: #000;
+  color: white;
+  border: none;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-right button:hover {
+  background: #1f1f1f;
+}
+
+.create-account {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.create-account a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+}

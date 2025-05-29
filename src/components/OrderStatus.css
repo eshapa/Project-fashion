@@ -1,0 +1,281 @@
+.order-status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.order-status-container.success {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  color: white;
+  animation: fadeIn 0.5s ease;
+}
+
+.order-status-container.error {
+  background: linear-gradient(135deg, #f44336, #C62828);
+  color: white;
+  animation: shake 0.5s ease;
+}
+
+.order-status-content {
+  text-align: center;
+  max-width: 600px;
+  padding: 40px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+  transform: scale(0.95);
+  animation: scaleUp 0.5s ease forwards;
+}
+
+.status-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  animation: bounce 1s ease infinite alternate;
+}
+
+.message-container {
+  overflow: hidden;
+}
+
+.status-message {
+  font-size: 1.3rem;
+  margin: 20px 0;
+  animation: slideUp 0.5s ease;
+}
+
+.confirmation-details {
+  margin: 30px 0;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.detail-item {
+  padding: 10px;
+  margin: 10px 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  animation: fadeIn 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.detail-item:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.detail-item:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.celebration-emoji {
+  font-size: 3rem;
+  margin-top: 20px;
+  animation: bounce 1s ease infinite, rotate 2s linear infinite;
+}
+
+.status-button {
+  padding: 15px 40px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 20px;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+}
+
+.order-status-container.success .status-button {
+  background: linear-gradient(to right, #2E7D32, #4CAF50);
+  color: white;
+  box-shadow: 0 5px 15px rgba(46, 125, 50, 0.4);
+}
+
+.order-status-container.error .status-button {
+  background: linear-gradient(to right, #C62828, #f44336);
+  color: white;
+  box-shadow: 0 5px 15px rgba(198, 40, 40, 0.4);
+}
+
+.status-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.status-button:active {
+  transform: translateY(1px);
+}
+
+.status-button.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Confetti styles */
+.confetti {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #f0f;
+  top: -10px;
+  opacity: 0;
+}
+
+.confetti-piece:nth-child(odd) {
+  background-color: #0ff;
+}
+
+.confetti-piece:nth-child(3n) {
+  background-color: #ff0;
+}
+
+.confetti-piece:nth-child(5n) {
+  background-color: #f00;
+}
+
+/* Error emojis */
+.error-emojis {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.error-emoji {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+  animation: floatUp 3s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes scaleUp {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Generate confetti animation */
+.confetti-piece {
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Generate random positions and animations for confetti */
+.confetti-piece {
+  left: calc(var(--random) * 100%);
+  animation-duration: calc(var(--duration) * 1s + 2s);
+  animation-delay: calc(var(--delay) * 1s);
+}
+
+/* Generate random positions and animations for error emojis */
+.error-emoji {
+  left: calc(var(--random) * 100%);
+  animation-delay: calc(var(--delay) * 1s);
+  animation-duration: calc(var(--duration) * 1s + 3s);
+}

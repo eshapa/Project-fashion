@@ -15,7 +15,8 @@ import UserRegistration from './components/userRegistration';
 import HeroSection from './components/Herosection';
 import AllDesigner from './components/Alldesigner';
 import VastraKosh from './src/components/VastraKosh';
-
+import PaymentForm  from './src/components/Paymentform';
+import PaymentSuccessPage from './src/components/PaymentSuccessPage';
 import FabricCategoryPage from './components/FabricCategoryPage';
 
 
@@ -44,7 +45,9 @@ function App() {
           <Route path="/userRegistration" element={<UserRegistration/>} />
             <Route path="/VastraKosh.js" element={<VastraKosh/>} />
         {/* Add similar routes for tailor and user registration if needed */}
-         <Route path="/fabric/:name" element={<FabricCategoryPage />} /> {/* 🔥 Just this added */}
+         <Route path="/fabric/:name" element={<FabricCategoryPage />} />
+             <Route path="/paymentform" element={<PaymentForm/>} />
+             <Route path="/payment-success/:paymentId" element={<PaymentSuccessPage />} /> {/* 🔥 Just this added */}
       </Routes>
 
       <Footer />

@@ -23,6 +23,12 @@ import ShopPortfolio from './components/ShopPortfolio';
 import OrderForm from './components/OrderForm';
 import TailorChat from './components/TailorChat';
 import FabricDetails from './components/FabricDetails';
+import OrderStatus from './components/OrderStatus';
+import Dashrollselction from './components/Dashrollselction';
+import Pagelogin from './components/Pagelogin';
+import AdminDashboard from './components/Admindashboard';
+import Dashwelcome from './components/Dashwelcome';
+//import './App.css';
 function App() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -58,7 +64,11 @@ function App() {
 <Route path="/orderform/:id" element={<OrderForm />} />
         <Route path="/chat/:id" element={<TailorChat />} />
    <Route path="/fabricdetails/:categoryName/:subtypeId" element={<FabricDetails />} />
-
+<Route path="order-status" element={<OrderStatus/>} />
+<Route path="pagelogin" element={<Pagelogin/>} />
+<Route path="dashrollselction" element={<Dashrollselction/>} />
+  <Route path="/admindashboard" element={<AdminDashboard />} /> 
+    <Route path="/dashwelcome" element={<Dashwelcome />} />   
              {/* 🔥 Just this added */}
         {/* Add similar routes for tailor and user registration if needed */}
       </Routes>
