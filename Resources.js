@@ -579,7 +579,7 @@ const getResultDescription = (type) => {
   <div className="fashion-quotes-container">
     {/* Quote 1 */}
     <div className="fashion-quote animated-quote">
-      <div className="quote-text">
+      <div className="quote-text8">
         "Fashion is the armor to survive the reality of everyday life."
       </div>
       <div className="quote-author">— Bill Cunningham</div>
@@ -588,7 +588,7 @@ const getResultDescription = (type) => {
 
     {/* Quote 2 */}
     <div className="fashion-quote animated-quote delay-1">
-      <div className="quote-text">
+      <div className="quote-text8">
         "Style is a way to say who you are without speaking."
       </div>
       <div className="quote-author">— Rachel Zoe</div>
@@ -597,7 +597,7 @@ const getResultDescription = (type) => {
 
     {/* Quote 3 */}
     <div className="fashion-quote animated-quote delay-2">
-      <div className="quote-text">
+      <div className="quote-text8">
         "Confidence is the best outfit. Rock it and own it!"
       </div>
       <div className="quote-author">— Unknown</div>
