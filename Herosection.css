@@ -1,0 +1,483 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Hero Wrapper */
+.hero-wrapper {
+  background-color: #fff;
+  overflow: hidden;
+}
+
+/* Hero Container */
+.hero-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
+.hero-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #000;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.hero-right {
+  flex: 1;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Marquee */
+.marquee-container {
+  width: 100%;
+  background-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 29px;
+}
+
+.marquee-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scrollText 18s linear infinite;
+  font-size: 1.5rem;
+  color: #555;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Quote Section */
+.quote-section {
+  height: 100vh;
+  background-color: #f5f3ef;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  scroll-snap-align: start;
+}
+
+.quote-text2 {
+  font-size: 2.9rem;
+  line-height: 1.6;
+  max-width: 1000px;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.quote-signature {
+  margin-top: 2rem;
+  font-size: 3rem;
+  color: #d49b63;
+  font-family: 'Great Vibes', cursive;
+  letter-spacing: 2px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+    height: auto;
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-left, .hero-right {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .hero-video {
+    max-width: 100%;
+    margin-top: 2rem;
+  }
+
+  .marquee-text {
+    font-size: 1rem;
+  }
+
+  .quote-text {
+    font-size: 2rem;
+    padding: 0 1rem;
+  }
+
+  .quote-signature {
+    font-size: 2.2rem;
+  }
+}
+.below-hero-container {
+  display: flex;
+  gap: 40px;
+  margin-top: 60px;
+  padding: 0 10%;
+  align-items: center;
+  
+}
+
+.video-left video {
+  width: 100%;
+  height: 100vh;
+  max-width: 500px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-top: -43vh !important; /* Force override */
+  display: block; /* Ensures margin works properly */
+}
+
+.content-right {
+  flex: 1;
+}
+
+.content-paragraph {
+  font-size: 20px; /* Increased font size */
+  line-height: 1.8; /* Slightly increased line height for better readability */
+  color: #333;
+  font-family: 'Merriweather', serif; /* New font for a more elegant style */
+  margin-bottom: 15px; /* Slightly larger bottom margin */
+}
+
+.tailoring-label {
+  color: #c88850;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #c88850;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.zoomable-image {
+  position: relative;
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.zoomable-image.zoomed {
+  transform: scale(1.5);
+  cursor: zoom-out;
+  z-index: 99;
+}
+
+.tailoring-image {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+.zoom-label {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: 'Georgia', serif;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.below-hero-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 100px;
+  gap: 50px;
+}
+
+.women-tailoring-section {
+  flex-direction: row; /* Keep image on left */
+}
+
+/* Left image box */
+.image-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.tailoring-image-wrapper {
+  position: relative;
+  width: 320px;  /* Make image smaller */
+  height: 420px; /* Maintain proportional size */
+  margin-top: -20px; /* Move it slightly upward */
+}
+
+.tailoring-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+/* Label over the image */
+.zoom-label {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Text content area */
+.content-right {
+  flex: 1;
+  background-color: #f7f7f7;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Responsive fix */
+@media (max-width: 768px) {
+  .below-hero-container {
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+
+  .tailoring-photo {
+    max-height: 300px;
+  }
+
+  .zoom-label {
+    font-size: 0.9rem;
+  }
+}
+
+/* Move entire section upward */
+.women-tailoring-section {
+  margin-top: -60px; /* Move section upwards */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 80px;
+  gap: 40px;
+}
+
+/* Make image a little smaller and center-aligned */
+.tailoring-image-wrapper {
+  position: relative;
+  width: 300px;      /* Width remains perfect */
+  height: 500px;     /* Increased height */
+  margin-top: -20px; /* Slightly upwards */
+}
+
+.tailoring-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Keep the text neat and aligned */
+.content-right {
+  flex: 1;
+  background-color: #f7f7f7;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: -20px; /* Move content slightly up */
+}
+
+/* Zoom label stays as is */
+.zoom-label {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .women-tailoring-section {
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+
+  .tailoring-image-wrapper {
+    width: 240px;
+    height: 320px;
+  }
+
+  .zoom-label {
+    font-size: 0.9rem;
+  }
+
+  .content-right {
+    margin-top: 10px;
+  }
+}
+
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+.background-video {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  right: 50px;
+  bottom: 50px;
+  width: calc(100% - 100px);
+  height: calc(100% - 100px);
+  object-fit: cover;
+}
+ .video-overlay3 {
+  position: absolute;
+  top: 50px; /* Match your container padding */
+  left: 50px; /* Match your container padding */
+  right: 50px;
+  bottom: 50px;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1; /* Above video but below text */
+}
+
+.hero-text {
+  color: white;
+  font-size: 1.8rem;
+  line-height: 1.4;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  margin-bottom: 2rem;
+}
+
+.video-overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 2; 
+  font-size: 24px; /* Adjust font size as needed */
+}
+
+
+.explore-button {
+  display: inline-block;
+ margin-left: 09vh;
+  position: relative;
+   top:20px; 
+  padding: 0.75rem 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Georgia', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.explore-button:hover {
+  background: #000;
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+}
+
+
+.content-right {
+  width: 50%; /* Adjust this value to make it smaller or larger */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px; /* Optional: add some padding */
+}
+
+.mens-card-wrapper {
+  max-width: 100%; /* Ensure the wrapper takes the full width of content-right */
+  margin: 0 auto;
+}
+
+.mens-card {
+  width: 100%; /* Ensure the card takes the full width of the wrapper */
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.mens-img {
+  width: 100%;
+  height: auto;
+}
+
+.explore-btn {
+  padding: 15px 30px; /* Larger padding for the button */
+  font-size: 1.5em; /* Increased font size for the button */
+  font-weight: bold; /* Bold text */
+  cursor: pointer;
+  background-color: #000; /* Optional: black background for contrast */
+  color: #fff; /* White text for the button */
+  border: none;
+  border-radius: 5px;
+}

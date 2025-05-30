@@ -3,6 +3,9 @@ import './Herosection.css';
 import mendress from './assests/men2.jpg';
 import womenTailor from './assests/mainmodel.jpg';
 import { Link } from 'react-router-dom'; // Import Link component from React Router
+import './Fashion';
+import './FashionCards.css';
+
 
 const HeroSection = () => {
   const [isZoomed, setIsZoomed] = useState(false);
@@ -51,7 +54,7 @@ const HeroSection = () => {
 
       {/* Quote Section */}
       <div className="quote-section">
-        <p className="quote-text">
+        <p className="quote-text2">
           Appreciation of exquisitely made attire. Here you’ll feel special, and receive a uniquely personal tailoring experience.
         </p>
         <p className="quote-signature">Divyluck</p>
@@ -59,24 +62,27 @@ const HeroSection = () => {
 
       {/* Fullscreen Background Video Section */}
       <div className="video-container">
-        <video
-          className="background-video"
-          src="https://richardgeorge.uk/wp-content/uploads/2024/01/homepage1.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-        ></video>
-        <div className="video-overlay-text">
-          <p>
-            We are a tailoring company where<br />
-            incredible tailoring is the by-product.<br />
-            What we create is feeling and emotion…
-          </p>
-          {/* Change from <a> to <Link> for navigation */}
-          <Link to="/alldesigner" className="explore-button">Explore All Tailors</Link>
-        </div>
-      </div>
+  <video
+    className="background-video"
+    src="https://richardgeorge.uk/wp-content/uploads/2024/01/homepage1.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+  ></video>
+  
+  {/* Add this overlay div right after the video */}
+  <div className="video-overlay3"></div>
+  
+  <div className="video-overlay-text">
+   <p className="hero-text"> {/* Added class for the paragraph */}
+      We are a tailoring company where<br />
+      incredible tailoring is the by-product.<br />
+      What we create is feeling and emotion…
+    </p>
+    <Link to="/alldesigner" className="explore-button">Explore All Tailors</Link>
+  </div>
+</div>
 
       {/* Men's Tailoring Section */}
      <div className="below-hero-container">

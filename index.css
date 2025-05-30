@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body, .Navbar, .Vastrakosh, .FabricDetails {
+  background-color: white !important;
+  color: #000 !important; /* Ensures text is black */
+}

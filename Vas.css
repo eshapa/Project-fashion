@@ -34,10 +34,11 @@
 }
 
 .quote-text {
-  font-size: 1.6rem;
-  font-style: italic;
-  line-height: 1.7;
-  margin-bottom: 1rem;
+font-size: 2.9rem !important;
+  line-height: 1.6;
+  max-width: 1000px;
+  color: #1a1a1a;
+  margin: 0;
 }
 
 .quote-signature {
@@ -79,7 +80,7 @@
   overflow: hidden;
 }
 
-.explore-button {
+.explore-button0 {
   /* Positioning */
   position: absolute;
   bottom: 40px;
@@ -100,7 +101,7 @@
   
   /* Colors */
   color: #fff;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(113, 138, 252, 0.15);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.3);
   
@@ -119,19 +120,19 @@
   gap: 8px;
 }
 
-.explore-button:hover {
+.explore-button0:hover {
   background: rgba(255, 255, 255, 0.25);
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateX(-50%) scale(1.05);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
-.explore-button:active {
+.explore-button0:active {
   transform: translateX(-50%) scale(0.98);
 }
 
 /* Glow effect on hover */
-.explore-button:hover::before {
+.explore-button0:hover::before {
   content: '';
   position: absolute;
   top: 0;
@@ -153,13 +154,13 @@
 }
 
 /* Arrow icon */
-.explore-button::after {
+.explore-button0::after {
   content: '→';
   display: inline-block;
   transition: transform 0.3s ease;
 }
 
-.explore-button:hover::after {
+.explore-button0:hover::after {
   transform: translateX(4px);
 }
 .arched-card1 {
